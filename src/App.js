@@ -11,7 +11,7 @@ const profileData = {
   // tagline: "Transforming data into actionable insights through machine learning and advanced analytics",
   email: "swikarbasnet30@gmail.com",
   github: "https://github.com/Swikar-2468",
-  linkedin: "https://www.linkedin.com/in/swikar-basnet-548516330/",
+  linkedin: "https://www.linkedin.com/in/swikar-basnet/",
   bio: "I'm a passionate computer engineering student with a strong foundation in machine learning, AI and data analysis. I am interested on solving complex problems using data-driven approaches that create real-world impact.",
   education: "Bachelors in Computer Engineering with AI specialization | Expected 2026",
   location: "Kathmandu, Nepal"
@@ -26,133 +26,148 @@ export const skillsData = {
 
 export const projectsData = [
   {
-    id: "Nepali Text Based Hate Content Classification",
+    id: "nepali-hate-speech-classification",
 
     name: "Nepali Text Based Hate Content Classification",
 
-    shortDescription: "NLP-based system for detecting and classifying hate and offensive content in Nepali text from social media and online platforms.",
+    shortDescription:
+      "NLP-based system for detecting and classifying hate and offensive content in Nepali social media text.",
 
     featured: true,
 
-    problem: "Online platforms in Nepal face increasing challenges in moderating hate speech and offensive language due to the lack of automated tools for Nepali text, making manual moderation slow, inconsistent, and ineffective at scale.",
+    problem:
+      "Online platforms in Nepal face increasing challenges in moderating hate speech and offensive language due to the lack of automated tools for Nepali text. Manual moderation is slow, inconsistent, and difficult to scale.",
 
-    dataset: "10000+ Nepali text samples collected from social media platforms, labeled as hate, offensive, or non offensive with multiclass calssification in offensive categorized as offensive-sexist, offensive-racist, offensive-racist or other offensive.",
+    dataset:
+      "10,000+ Nepali text samples collected from social media platforms. The dataset was labeled into multiple classes: hate speech, offensive (sexist, racist, or other offensive), and non-offensive.",
 
-    approach: "Developed a multi-stage NLP pipeline including Nepali text normalization, tokenization, and stopword removal....",
+    approach:
+      "Developed a multi-stage NLP pipeline including Nepali text normalization, tokenization, stopword removal, and feature representation. Implemented multiple baseline models including Logistic Regression, SVM, Random Forest, and Naive Bayes. Additionally fine-tuned XLM-RoBERTa to better capture contextual semantics in Nepali language.",
 
-    models: ["XLM-RoBERTa (fine-tuned for Nepali)", "GRU", "Random Forest", "SVM", "Logistic Regression", "Naive Bayes"],
+    models: [
+      "XLM-RoBERTa (fine-tuned)",
+      "GRU",
+      "Random Forest",
+      "SVM",
+      "Logistic Regression",
+      "Naive Bayes"
+    ],
 
-    tools: ["Python", "TensorFlow", "Hugging Face Transformers", "NLTK", "Pandas", "NumPy"],
+    tools: [
+      "Python",
+      "TensorFlow",
+      "Hugging Face Transformers",
+      "NLTK",
+      "Pandas",
+      "NumPy"
+    ],
 
-    results: "Achieved high classification performance with reliable detection of hate and offensive content. The system significantly reduced manual moderation effort and improved content monitoring efficiency for Nepali-language platforms.",
+    results:
+      "The system successfully classified hate and offensive content in Nepali text with strong predictive performance, demonstrating the feasibility of automated moderation tools for Nepali-language platforms.",
 
-    metrics:
-    {
-    // accuracy: "94.2%",
-    // f1Score: "0.93",
-    // processingSpeed: "1000 texts/min"
+    metrics: {
+      accuracy: "92%",
+      f1Score: "0.90",
+      recall: "0.88"
     },
 
     github: "https://github.com/Swikar-2468/major-project",
 
     image: null
+  },
+
+  {
+    id: "movie-recommendation-system",
+
+    name: "Movie Recommendation System",
+
+    shortDescription:
+      "Personalized movie recommendation system using collaborative filtering techniques.",
+
+    featured: true,
+
+    problem:
+    "With thousands of movies available on streaming platforms, users often struggle to discover movies similar to the ones they enjoy. A recommendation system helps users find relevant content quickly.",
+
+    dataset:
+    "IMDb 5000+ Movies dataset combined with a movie credits dataset containing cast and crew information. The datasets were merged to enrich movie metadata for better similarity analysis.",
+
+    approach:
+    "Built a content-based recommendation system by combining movie metadata such as genres, keywords, cast, and crew into a unified feature representation. Applied text preprocessing and vectorization techniques to transform movie features into numerical vectors, and used cosine similarity to compute similarity scores between movies.",
+
+    models: [
+      "Content-Based Filtering",
+      "Cosine Similarity"
+    ],
+
+    tools: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Jupyter Notebook"
+    ],
+
+    results:
+    "The system successfully recommends movies similar to a selected title based on feature similarity. The recommendation engine was deployed using Streamlit, allowing users to interactively search for movies and receive real-time recommendations.",
+
+    // metrics: {
+    //   rmse: "0.87",
+    //   precisionAtK: "0.81",
+    //   recallAtK: "0.76"
+    // },
+
+    github: "https://github.com/Swikar-2468/Movie-Recommender-System",
+
+    image: null
+  },
+
+  {
+    id: "upper-body-posture-correction",
+
+    name: "Upper Body Posture Correction for Fitness",
+
+    shortDescription:
+      "Computer vision based system that detects and corrects upper body posture during exercises.",
+
+    featured: true,
+
+    problem:
+      "Incorrect posture during workouts can lead to injuries and ineffective training. Many beginners lack proper guidance when exercising without a trainer.",
+
+    dataset:
+      "Real-time webcam video input processed using pose estimation models to detect body keypoints and analyze posture.",
+
+    approach:
+      "Used computer vision techniques to detect human body landmarks and analyze upper body posture. Implemented pose estimation to track shoulders, elbows, and spine alignment during exercises. The system provides real-time feedback to help users correct their posture.",
+
+    models: [
+      "Pose Estimation",
+      "MediaPipe Pose",
+      "Computer Vision Keypoint Detection"
+    ],
+
+    tools: [
+      "Python",
+      "OpenCV",
+      "MediaPipe",
+      "NumPy"
+    ],
+
+    results:
+      "The system was able to detect incorrect upper body posture in real time and provide visual feedback to guide users toward correct form during workouts.",
+
+    metrics: {
+      detectionAccuracy: "90%",
+      realTimeProcessing: "25 FPS"
+    },
+
+    // github: "https://github.com/Swikar-2468",
+
+    // image: null
   }
-  // {
-  //   id: "stock-predictor",
-  //   name: "Stock Price Prediction Model",
-  //   shortDescription: "Time series forecasting model for predicting stock market trends",
-  //   featured: true,
-  //   problem: "Individual investors lack sophisticated tools for predicting short-term stock price movements based on historical patterns and market indicators.",
-  //   dataset: "10 years of historical data for S&P 500 stocks, including OHLCV data, technical indicators, and sentiment scores from financial news",
-  //   approach: "Developed a hybrid model combining LSTM networks for sequence learning with technical indicators and sentiment analysis. Used sliding window approach for time series.",
-  //   models: ["LSTM Neural Network", "GRU", "ARIMA (baseline)", "XGBoost"],
-  //   tools: ["Python", "Keras", "TensorFlow", "yFinance", "Plotly", "Streamlit"],
-  //   results: "Outperformed baseline ARIMA model by 23% on RMSE. Achieved 67% directional accuracy for 5-day predictions. Deployed interactive dashboard for real-time predictions.",
-  //   metrics: {
-  //     rmse: "2.34",
-  //     directionalAccuracy: "67%",
-  //     sharpeRatio: "1.45"
-  //   },
-  //   github: "https://github.com/alexchen/stock-predictor",
-  //   image: null
-  // },
-  // {
-  //   id: "healthcare-diagnosis",
-  //   name: "Medical Image Classification",
-  //   shortDescription: "CNN-based system for detecting pneumonia from chest X-rays",
-  //   featured: true,
-  //   problem: "Early detection of pneumonia from chest X-rays requires expert radiologists, leading to delays in diagnosis, especially in resource-constrained settings.",
-  //   dataset: "5,863 chest X-ray images (JPEG) from Guangzhou Women and Children's Medical Center, labeled as Normal or Pneumonia",
-  //   approach: "Fine-tuned pre-trained ResNet50 model using transfer learning. Applied data augmentation (rotation, zoom, flip) to prevent overfitting. Used class weights to handle imbalanced dataset.",
-  //   models: ["ResNet50 (transfer learning)", "DenseNet121", "Custom CNN", "Ensemble"],
-  //   tools: ["Python", "TensorFlow", "Keras", "OpenCV", "Matplotlib", "Google Colab"],
-  //   results: "Achieved 96.8% accuracy and 97.2% recall (crucial for medical diagnosis). Model processes images in under 2 seconds. Published findings in university research journal.",
-  //   metrics: {
-  //     accuracy: "96.8%",
-  //     precision: "95.1%",
-  //     recall: "97.2%"
-  //   },
-  //   github: "https://github.com/alexchen/medical-imaging",
-  //   image: null
-  // },
-  // {
-  //   id: "recommendation-engine",
-  //   name: "Personalized Content Recommendation System",
-  //   shortDescription: "Collaborative filtering system for personalized content suggestions",
-  //   featured: true,
-  //   problem: "Content platforms need to deliver personalized recommendations to increase user engagement and retention in a highly competitive market.",
-  //   dataset: "2 million user-item interactions from a streaming platform, including ratings, watch history, and user demographics",
-  //   approach: "Built a hybrid recommendation system combining collaborative filtering (matrix factorization) with content-based filtering using item features. Implemented cold start solutions.",
-  //   models: ["Matrix Factorization (SVD)", "Neural Collaborative Filtering", "Content-Based Filtering", "Hybrid Ensemble"],
-  //   tools: ["Python", "Surprise", "TensorFlow", "Spark MLlib", "Redis", "PostgreSQL"],
-  //   results: "Improved click-through rate by 34% and average session duration by 28%. Reduced cold start issues for new users by 45%. System handles 10,000 requests/second.",
-  //   metrics: {
-  //     precision: "0.82",
-  //     recall: "0.76",
-  //     ndcg: "0.89"
-  //   },
-  //   github: "https://github.com/alexchen/recommendation-engine",
-  //   image: null
-  // },
-  // {
-  //   id: "fraud-detection",
-  //   name: "Credit Card Fraud Detection",
-  //   shortDescription: "Real-time anomaly detection system for fraudulent transactions",
-  //   featured: false,
-  //   problem: "Financial institutions lose billions annually to credit card fraud. Traditional rule-based systems have high false positive rates.",
-  //   dataset: "284,807 credit card transactions with 492 frauds (highly imbalanced dataset, 0.172% fraud rate)",
-  //   approach: "Implemented anomaly detection using isolation forests and autoencoders. Used SMOTE for handling class imbalance. Created real-time scoring API.",
-  //   models: ["Isolation Forest", "Autoencoder", "XGBoost", "Random Forest"],
-  //   tools: ["Python", "Scikit-learn", "TensorFlow", "FastAPI", "Docker", "Prometheus"],
-  //   results: "Achieved 99.8% accuracy with 0.02% false positive rate. Detected 96% of fraudulent transactions. Reduced investigation time by 60%.",
-  //   metrics: {
-  //     accuracy: "99.8%",
-  //     precision: "0.94",
-  //     recall: "0.96"
-  //   },
-  //   github: "https://github.com/alexchen/fraud-detection",
-  //   image: null
-  // },
-  // {
-  //   id: "chatbot-assistant",
-  //   name: "AI-Powered Customer Service Chatbot",
-  //   shortDescription: "NLP chatbot for automated customer support with 24/7 availability",
-  //   featured: false,
-  //   problem: "Customer service teams are overwhelmed with repetitive queries, leading to long wait times and reduced customer satisfaction.",
-  //   dataset: "50,000 customer service conversations across multiple channels, annotated with intent labels and entity tags",
-  //   approach: "Developed intent classification system using BERT. Implemented dialogue management with state tracking. Integrated with knowledge base for accurate responses.",
-  //   models: ["BERT (intent classification)", "Named Entity Recognition", "Seq2Seq with Attention", "Retrieval-based QA"],
-  //   tools: ["Python", "Rasa", "Hugging Face", "FastAPI", "MongoDB", "React"],
-  //   results: "Automated 73% of customer inquiries. Reduced average response time from 12 minutes to 8 seconds. Achieved 88% customer satisfaction rating.",
-  //   metrics: {
-  //     intentAccuracy: "91%",
-  //     automationRate: "73%",
-  //     csat: "88%"
-  //   },
-  //   github: "https://github.com/alexchen/chatbot-assistant",
-  //   image: null
-  // }
 ];
+
 
 export const certificationsData = [
   {
@@ -167,6 +182,13 @@ export const certificationsData = [
     year: 2025,
     credentialUrl: "https://www.datacamp.com/completed/statement-of-accomplishment/course/53393799610c1742ae78051c939fd7e0ae4bc15d"
   },
+
+  {
+    title: "Data Science with Python",
+    issuer: "Khwopa College of Engineering",
+    year: 2024,
+  },
+  
   {
     title: "Introduction to Statistics in Python",
     issuer: "DataCamp",
@@ -175,39 +197,31 @@ export const certificationsData = [
   },
 
   {
-    title: "Data Science with Python",
-    issuer: "Khwopa College of Engineering",
-    year: 2024,
-    // paste an image in here
-    
-
-  },
-  {
-    title: "Professional Data Engineer",
-    issuer: "Google Cloud",
-    year: 2023,
-    credentialUrl: "https://cloud.google.com/certification"
+    title: "Hugging Face AI Agents Course",
+    issuer: "Hugging Face",
+    year: 2025,
+    credentialUrl: "https://cdn-uploads.huggingface.co/production/uploads/noauth/Z4qmohQVIpQvD6i3wnMQU.webp"
   }
 ];
 
 export const experienceData = [
   {
-    title: "Machine Learning Intern",
-    company: "Tech Innovations Inc.",
-    period: "Summer 2024",
-    description: "Developed predictive models for customer churn, improving retention by 15%. Worked with cross-functional teams to deploy ML solutions to production."
-  },
-  {
-    title: "Data Science Research Assistant",
-    company: "University AI Lab",
-    period: "2023 - Present",
-    description: "Conducting research on neural network optimization techniques. Published 2 papers on efficient training methods for large language models."
-  },
-  {
-    title: "Analytics Intern",
-    company: "DataDriven Solutions",
-    period: "Summer 2023",
-    description: "Built ETL pipelines processing 10M+ records daily. Created interactive dashboards using Tableau, enabling data-driven decision making across departments."
+  //   title: "Machine Learning Intern",
+  //   company: "Tech Innovations Inc.",
+  //   period: "Summer 2024",
+  //   description: "Developed predictive models for customer churn, improving retention by 15%. Worked with cross-functional teams to deploy ML solutions to production."
+  // },
+  // {
+  //   title: "Data Science Research Assistant",
+  //   company: "University AI Lab",
+  //   period: "2023 - Present",
+  //   description: "Conducting research on neural network optimization techniques. Published 2 papers on efficient training methods for large language models."
+  // },
+  // {
+  //   title: "Analytics Intern",
+  //   company: "DataDriven Solutions",
+  //   period: "Summer 2023",
+  //   description: "Built ETL pipelines processing 10M+ records daily. Created interactive dashboards using Tableau, enabling data-driven decision making across departments."
   }
 ];
 
@@ -314,7 +328,7 @@ const HomePage = ({ setCurrentPage, setSelectedProject }) => {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Featured Projects</h2>
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {featuredProjects.map(project => (
+            {featuredProjects.slice(0, 2).map(project => (
               <ProjectCard 
                 key={project.id} 
                 project={project} 
@@ -515,14 +529,14 @@ const SkillsExperiencePage = () => {
       </section>
       
       {/* Experience */}
-      <section>
+      {/* <section>
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Experience</h2>
         <div className="space-y-6">
           {experienceData.map((exp, idx) => (
             <ExperienceCard key={idx} experience={exp} />
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
@@ -696,7 +710,7 @@ const App = () => {
       <footer className="bg-gray-900 text-white py-8 mt-16">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <p className="text-gray-400">
-            © 2024 {profileData.name}. Built with React.
+            © 2026 {profileData.name}. Built with React.
           </p>
         </div>
       </footer>
