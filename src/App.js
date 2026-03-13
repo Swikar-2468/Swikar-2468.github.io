@@ -111,12 +111,6 @@ export const projectsData = [
     results:
     "The system successfully recommends movies similar to a selected title based on feature similarity. The recommendation engine was deployed using Streamlit, allowing users to interactively search for movies and receive real-time recommendations.",
 
-    // metrics: {
-    //   rmse: "0.87",
-    //   precisionAtK: "0.81",
-    //   recallAtK: "0.76"
-    // },
-
     github: "https://github.com/Swikar-2468/Movie-Recommender-System",
 
     image: null
@@ -161,10 +155,6 @@ export const projectsData = [
       detectionAccuracy: "90%",
       realTimeProcessing: "25 FPS"
     },
-
-    // github: "https://github.com/Swikar-2468",
-
-    // image: null
   }
 ];
 
@@ -206,22 +196,6 @@ export const certificationsData = [
 
 export const experienceData = [
   {
-  //   title: "Machine Learning Intern",
-  //   company: "Tech Innovations Inc.",
-  //   period: "Summer 2024",
-  //   description: "Developed predictive models for customer churn, improving retention by 15%. Worked with cross-functional teams to deploy ML solutions to production."
-  // },
-  // {
-  //   title: "Data Science Research Assistant",
-  //   company: "University AI Lab",
-  //   period: "2023 - Present",
-  //   description: "Conducting research on neural network optimization techniques. Published 2 papers on efficient training methods for large language models."
-  // },
-  // {
-  //   title: "Analytics Intern",
-  //   company: "DataDriven Solutions",
-  //   period: "Summer 2023",
-  //   description: "Built ETL pipelines processing 10M+ records daily. Created interactive dashboards using Tableau, enabling data-driven decision making across departments."
   }
 ];
 
@@ -274,6 +248,19 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
   );
 };
 
+const ProfilePhoto = () => (
+  <div className="flex-shrink-0 flex justify-center md:justify-end">
+    <div className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-xl bg-gradient-to-br from-blue-200 to-indigo-300 flex items-center justify-center">
+      {/* Replace the src below with your actual photo URL when ready */}
+      <img
+        src="/Profile.jpg"
+        alt="Swikar Basnet"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+);
+
 const HomePage = ({ setCurrentPage, setSelectedProject }) => {
   const featuredProjects = projectsData.filter(p => p.featured).slice(0, 4);
   
@@ -282,30 +269,36 @@ const HomePage = ({ setCurrentPage, setSelectedProject }) => {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-indigo-50 py-20">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
-              {profileData.name}
-            </h1>
-            <p className="text-2xl text-blue-600 font-semibold mb-6">
-              {profileData.role}
-            </p>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-              {profileData.tagline}
-            </p>
-            <div className="flex gap-4 flex-wrap">
-              <button 
-                onClick={() => setCurrentPage('Projects')}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
-              >
-                View My Work <ChevronRight size={20} />
-              </button>
-              <button 
-                onClick={() => setCurrentPage('Contact')}
-                className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition"
-              >
-                Get in Touch
-              </button>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+            {/* Left: Text content */}
+            <div className="max-w-2xl">
+              <h1 className="text-5xl font-bold text-gray-900 mb-4">
+                {profileData.name}
+              </h1>
+              <p className="text-2xl text-blue-600 font-semibold mb-6">
+                {profileData.role}
+              </p>
+              <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+                {profileData.tagline}
+              </p>
+              <div className="flex gap-4 flex-wrap">
+                <button 
+                  onClick={() => setCurrentPage('Projects')}
+                  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
+                >
+                  View My Work <ChevronRight size={20} />
+                </button>
+                <button 
+                  onClick={() => setCurrentPage('Contact')}
+                  className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition"
+                >
+                  Get in Touch
+                </button>
+              </div>
             </div>
+
+            {/* Right: Profile photo */}
+            <ProfilePhoto />
           </div>
         </div>
       </section>
@@ -527,16 +520,6 @@ const SkillsExperiencePage = () => {
           <SkillCategory title="Tools & Platforms" skills={skillsData.tools} />
         </div>
       </section>
-      
-      {/* Experience */}
-      {/* <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Experience</h2>
-        <div className="space-y-6">
-          {experienceData.map((exp, idx) => (
-            <ExperienceCard key={idx} experience={exp} />
-          ))}
-        </div>
-      </section> */}
     </div>
   );
 };
@@ -634,46 +617,153 @@ const AboutPage = () => {
 };
 
 const ContactPage = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    try {
+    
+      const response = await fetch('https://formspree.io/f/xpqyrvya', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h1>
       <p className="text-gray-600 mb-12">I'd love to hear from you! Feel free to reach out for opportunities, collaborations, or just to chat about AI and data.</p>
       
       <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
-          
-          <div className="space-y-4">
-            <a href={`mailto:${profileData.email}`} className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition">
-              <Mail className="text-blue-600" size={24} />
-              <span>{profileData.email}</span>
-            </a>
-            
-            <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition">
-              <Linkedin className="text-blue-600" size={24} />
-              <span>LinkedIn Profile</span>
-            </a>
-            
-            <a href={profileData.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition">
-              <Github className="text-blue-600" size={24} />
-              <span>GitHub Profile</span>
-            </a>
+        {/* Left: Contact info */}
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
+            <div className="space-y-4">
+              <a href={`mailto:${profileData.email}`} className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition">
+                <Mail className="text-blue-600" size={24} />
+                <span>{profileData.email}</span>
+              </a>
+              <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition">
+                <Linkedin className="text-blue-600" size={24} />
+                <span>LinkedIn Profile</span>
+              </a>
+              <a href={profileData.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition">
+                <Github className="text-blue-600" size={24} />
+                <span>GitHub Profile</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+            <p className="text-gray-700 leading-relaxed">
+              I'm always open to discussing new projects, creative ideas, or opportunities. I typically respond within 24–48 hours.
+            </p>
           </div>
         </div>
-        
-        <div className="bg-blue-50 rounded-lg border border-blue-200 p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Let's Connect</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-          </p>
-          <div className="bg-white rounded-lg p-6 border border-gray-200">
-            <p className="text-gray-700 mb-2">
-              <strong>Best way to reach me:</strong>
-            </p>
-            <p className="text-gray-600">
-              Send me an email at <a href={`mailto:${profileData.email}`} className="text-blue-600 hover:underline font-semibold">{profileData.email}</a> or connect with me on LinkedIn. I typically respond within 24-48 hours.
-            </p>
-          </div>
+
+        {/* Right: Contact form */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h2>
+
+          {status === 'success' ? (
+            <div className="text-center py-12">
+              <div className="text-green-500 text-5xl mb-4">✓</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+              <p className="text-gray-600 mb-6">Thanks for reaching out. I'll get back to you soon.</p>
+              <button
+                onClick={() => setStatus('idle')}
+                className="px-6 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition"
+              >
+                Send Another
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your name"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  placeholder="What's this about?"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  placeholder="Tell me more..."
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
+                />
+              </div>
+
+              {status === 'error' && (
+                <p className="text-red-600 text-sm">Something went wrong. Please try again or email me directly.</p>
+              )}
+
+              <button
+                onClick={handleSubmit}
+                disabled={status === 'sending'}
+                className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
